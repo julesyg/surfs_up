@@ -17,46 +17,28 @@ Station = Base.classes.station
 session = Session(engine)
 
 app = Flask(__name__)
-import app
+# import app
 
-print("example __name__ = %s", __name__)
+# print("example __name__ = %s", __name__)
 
-if __name__ == "__main__":
-    print("example is being run directly.")
-else:
-    print("example is being imported")
+# if __name__ == "__main__":
+#     print("example is being run directly.")
+# else:
+#     print("example is being imported")
+
 
 @app.route("/")
 def welcome():
-    return(    '''
-    Welcome to the Climate Analysis API!
-    Available Routes:
-    /api/v1.0/precipitation
-    /api/v1.0/stations
-    /api/v1.0/tobs
-    /api/v1.0/temp/start/end
+    return('''
+    Welcome to the Climate Analysis API!\n
+    Available Routes:\n
+    /api/v1.0/precipitation\n
+    /api/v1.0/stations\n
+    /api/v1.0/tobs\n
+    /api/v1.0/temp/start/end\n
     ''')
-# flask run
+# # flask run
 @app.route("/api/v1.0/precipitation")
-
-def precipitation():
-    return
-
-def precipitation():
-   prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
-   return
-
-def precipitation():
-   prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
-   precipitation = session.query(Measurement.date, Measurement.prcp).\
-      filter(Measurement.date >= prev_year).all()
-   return
-
-{
-"city" : {
-"name" : "des moines",
-        "region" : "midwest"}
-}
 
 def precipitation():
    prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
@@ -68,39 +50,11 @@ def precipitation():
 @app.route("/api/v1.0/stations")
 
 def stations():
-    return
-
-def stations():
-    results = session.query(Station.station).all()
-    return
-
-def stations():
     results = session.query(Station.station).all()
     stations = list(np.ravel(results))
     return jsonify(stations=stations)
 
 @app.route("/api/v1.0/tobs")
-
-def temp_monthly():
-    return
-
-def temp_monthly():
-    prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
-    return
-
-def temp_monthly():
-    prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
-    results = session.query(Measurement.tobs).\
-        filter(Measurement.station == 'USC00519281').\
-        filter(Measurement.date >= prev_year).all()
-    return
-
-def temp_monthly():
-    prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
-    results = session.query(Measurement.tobs).\
-      filter(Measurement.station == 'USC00519281').\
-      filter(Measurement.date >= prev_year).all()
-    temps = list(np.ravel(results))
 
 def temp_monthly():
     prev_year = dt.date(2017, 8, 23) - dt.timedelta(days=365)
@@ -112,12 +66,6 @@ def temp_monthly():
 
 @app.route("/api/v1.0/temp/<start>")
 @app.route("/api/v1.0/temp/<start>/<end>")
-
-def stats():
-     return
-
-def stats(start=None, end=None):
-     return
 
 def stats(start=None, end=None):
     sel = [func.min(Measurement.tobs), func.avg(Measurement.tobs), func.max(Measurement.tobs)]
@@ -134,7 +82,5 @@ def stats(start=None, end=None):
     temps = list(np.ravel(results))
     return jsonify(temps)
 
-    # flask run
-
-
-
+if __name__ == '__main__':
+    app.run()
